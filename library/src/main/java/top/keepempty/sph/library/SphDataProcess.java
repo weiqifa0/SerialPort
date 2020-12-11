@@ -1,6 +1,7 @@
 package top.keepempty.sph.library;
 
 import android.os.Message;
+import android.util.Log;
 
 /**
  * 串口数据处理
@@ -70,7 +71,10 @@ public class SphDataProcess {
      * 串口写入数据
      */
     public void writeData() {
-        if (concurrentCom.getCurrentCmdEntity() == null) {
+        currentCommand = concurrentCom.get();
+        Log.e("UART", "data:"+currentCommand.commands);
+        SerialPortJNI.writePort(currentCommand.commands);
+        /*if (concurrentCom.getCurrentCmdEntity() == null) {
             if (!concurrentCom.isCmdEmpty()) {
                 currentCommand = concurrentCom.get();
                 if (onResultCallback != null) {
@@ -83,7 +87,7 @@ public class SphDataProcess {
                 SerialPortJNI.writePort(currentCommand.commands);
                 concurrentCom.setStatus(true);
             }
-        }
+        }*/
     }
 
 

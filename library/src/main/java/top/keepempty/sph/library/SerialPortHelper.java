@@ -139,6 +139,7 @@ public class SerialPortHelper {
             processingData.setSphResultCallback(onResultCallback);
             // 开启读写线程
             sphThreads = new SphThreads(processingData);
+            Log.d(TAG,"create threads success!!!");
         }else{
             mIsOpen = false;
             Log.e(TAG,"cannot open the device !!! " +

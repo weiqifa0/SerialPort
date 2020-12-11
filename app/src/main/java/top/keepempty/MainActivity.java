@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -14,9 +15,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import top.keepempty.sph.library.DataConversion;
 import top.keepempty.sph.library.SerialPortConfig;
 import top.keepempty.sph.library.SerialPortFinder;
 import top.keepempty.sph.library.SerialPortHelper;
+import top.keepempty.sph.library.SerialPortJNI;
 import top.keepempty.sph.library.SphCmdEntity;
 import top.keepempty.sph.library.SphResultCallback;
 
@@ -56,21 +59,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        /*隐藏标题栏目*/
+        if (getSupportActionBar() != null){
+            getSupportActionBar().hide();
+        }
+        /*初始化*/
         init();
     }
 
-    private void init() {
-        mPathSpinner = findViewById(R.id.sph_path);
-        mBaudRateSpinner = findViewById(R.id.sph_baudRate);
-        mDataSpinner = findViewById(R.id.sph_data);
-        mCheckSpinner = findViewById(R.id.sph_check);
-        mStopSpinner = findViewById(R.id.sph_stop);
-        mOpenBtn = findViewById(R.id.sph_openBtn);
-        mSendBtn = findViewById(R.id.sph_sendBtn);
-        mShowReceiveTxt = findViewById(R.id.sph_showReceiveTxt);
-        mSendDataEt = findViewById(R.id.sph_sendDataEt);
-
-        mBaudRateSpinner.setSelection(13);
+    private void setting_init(){
+        mBaudRateSpinner.setSelection(17);
         mDataSpinner.setSelection(3);
         mCheckSpinner.setSelection(0);
         mStopSpinner.setSelection(0);
@@ -84,9 +82,23 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         mSerialPortFinder = new SerialPortFinder();
         entryValues = mSerialPortFinder.getAllDevicesPath();
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-              this, android.R.layout.simple_spinner_item,
-               entryValues);
+                this, android.R.layout.simple_spinner_item,
+                entryValues);
         mPathSpinner.setAdapter(adapter);
+    }
+
+    private void init() {
+        mPathSpinner = findViewById(R.id.sph_path);
+        mBaudRateSpinner = findViewById(R.id.sph_baudRate);
+        mDataSpinner = findViewById(R.id.sph_data);
+        mCheckSpinner = findViewById(R.id.sph_check);
+        mStopSpinner = findViewById(R.id.sph_stop);
+        mOpenBtn = findViewById(R.id.sph_openBtn);
+        mSendBtn = findViewById(R.id.sph_sendBtn);
+        mShowReceiveTxt = findViewById(R.id.sph_showReceiveTxt);
+        mSendDataEt = findViewById(R.id.sph_sendDataEt);
+
+        setting_init();
 
         mSendBtn = findViewById(R.id.sph_sendBtn);
         mSendBtn.setOnClickListener(new View.OnClickListener() {
@@ -101,7 +113,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     Toast.makeText(MainActivity.this,"命令错误！",Toast.LENGTH_LONG).show();
                     return;
                 }
-                serialPortHelper.addCommands(sendTxt);
+                //serialPortHelper.addCommands(sendTxt);
+                /*直接调用JNI库发送数据*/
+                SerialPortJNI.writePort(DataConversion.decodeHexString(sendTxt));
+                //setContentView(R.layout.activity_setting);  //加载layout_2布局文件
             }
         });
 
@@ -141,6 +156,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         // 设置串口参数
         serialPortHelper.setConfigInfo(serialPortConfig);
         // 开启串口
+        //isOpen = serialPortHelper.openDevice("/dev/ttyMT2",115200);
         isOpen = serialPortHelper.openDevice();
         if(!isOpen){
             Toast.makeText(this,"串口打开失败！",Toast.LENGTH_LONG).show();
@@ -211,10 +227,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
 
+    /*把发送窗口清空*/
     public void clearSend(View view) {
         mSendDataEt.setText("");
     }
 
+    /*接收窗口清空*/
     public void clearReceive(View view) {
         receiveTxt = new StringBuilder();
         mShowReceiveTxt.setText("");

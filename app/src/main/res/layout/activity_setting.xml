@@ -140,106 +140,11 @@
 
         <Button
             android:id="@+id/sph_openBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="@drawable/button_style_org"
             android:text="打开串口" />
 
     </LinearLayout>
-
-    <View
-        android:layout_width="1dp"
-        android:layout_height="match_parent"
-        android:background="#303030" />
-
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="20dp"
-        android:layout_weight="1.0"
-        android:orientation="vertical"
-        android:padding="10dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:text="接收数据：" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/button_style_org"
-                android:onClick="clearReceive"
-                android:text="清空" />
-
-        </LinearLayout>
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1.0"
-            android:padding="5dp"
-            android:background="@drawable/button_style_stroke">
-            <TextView
-                android:id="@+id/sph_showReceiveTxt"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                 />
-        </ScrollView>
-
-
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:text="16进制数据：" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/button_style_org"
-                android:onClick="clearSend"
-                android:text="清空" />
-
-        </LinearLayout>
-
-        <EditText
-            android:id="@+id/sph_sendDataEt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_style_stroke"
-            android:text="1A285C6D158686860F"
-            android:lines="2" />
-
-        <Button
-            android:id="@+id/sph_sendBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/button_style_org"
-            android:text="发送" />
-
-    </LinearLayout>
-
-
 
 </LinearLayout>

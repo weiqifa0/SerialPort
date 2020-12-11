@@ -43,6 +43,7 @@ JNIEXPORT jbyteArray JNICALL Java_top_keepempty_sph_library_SerialPortJNI_readPo
     jbyteArray byteArray;
     jbyte *bytes = reinterpret_cast<jbyte *>(buf);
     byteArray = env->NewByteArray(len);
+    LOGD("JNI_readPort:%x", bytes);
     env->SetByteArrayRegion(byteArray, 0, len, bytes);
     return byteArray;
 }
@@ -57,6 +58,7 @@ JNIEXPORT void JNICALL Java_top_keepempty_sph_library_SerialPortJNI_writePort
     jbyte *array = env->GetByteArrayElements(data, 0);
     BYTE *bytes = reinterpret_cast<BYTE *>(array);
     jsize arrayLength = env->GetArrayLength(data);
+    LOGD("JNI_writePort:%x", array[0]);
     serialPort.writeData(bytes, (int)arrayLength);
 }
 
