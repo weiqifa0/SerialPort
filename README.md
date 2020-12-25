@@ -190,7 +190,15 @@ serialPortHelper.setSphResultCallback(new SphResultCallback() {
 serialPortHelper.closeDevice();
 ```
 
-# 6、修改记录
+
+
+# 6、常见问题
+
+## 6.1、串口打开失败
+
+一般情况就是设备节点的权限不正确，可以使用命令查看串口的设备节点权限。
+
+# 7、修改记录
 
 ## 20201225-修改
 
