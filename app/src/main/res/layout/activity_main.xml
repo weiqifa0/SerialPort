@@ -12,13 +12,8 @@
         android:layout_height="match_parent"
         android:layout_weight="1.0"
         android:orientation="vertical"
+        android:id="@+id/setting"
         android:padding="10dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="串口设置"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -135,17 +130,15 @@
                     android:entries="@array/stop_bits_arr"/>
 
             </LinearLayout>
-        </LinearLayout>
 
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/sph_openBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/button_style_org"
-            android:text="打开串口" />
-
+            android:text="串口设置" />
     </LinearLayout>
 
     <View
@@ -165,7 +158,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
             android:orientation="horizontal"
             android:gravity="center_vertical">
             <TextView
@@ -177,7 +169,6 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_style_org"
                 android:onClick="clearReceive"
                 android:text="清空" />
 
@@ -203,7 +194,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:layout_marginBottom="10dp"
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
@@ -216,9 +206,14 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_style_org"
                 android:onClick="clearSend"
-                android:text="清空" />
+                android:text="清空发送框" />
+
+            <Button
+                android:id="@+id/sph_setBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="打开串口设置" />
 
         </LinearLayout>
 
@@ -234,8 +229,6 @@
             android:id="@+id/sph_sendBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/button_style_org"
             android:text="发送" />
 
     </LinearLayout>

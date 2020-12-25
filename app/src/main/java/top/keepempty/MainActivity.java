@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private Button mSendBtn;
     private Button mOpenBtn;
+    private Button mSetBtn;
 
     private EditText mSendDataEt;
 
@@ -53,6 +55,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private String[] entryValues;
     private boolean isOpen;
     private StringBuilder receiveTxt = new StringBuilder();
+
+    LinearLayout mainLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,8 +99,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         mStopSpinner = findViewById(R.id.sph_stop);
         mOpenBtn = findViewById(R.id.sph_openBtn);
         mSendBtn = findViewById(R.id.sph_sendBtn);
+        mSetBtn  = findViewById(R.id.sph_setBtn);
         mShowReceiveTxt = findViewById(R.id.sph_showReceiveTxt);
         mSendDataEt = findViewById(R.id.sph_sendDataEt);
+        mainLayout=(LinearLayout)this.findViewById(R.id.setting);
+
+
+        /*启动就隐藏*/
+        mainLayout.setVisibility(LinearLayout.GONE);
 
         setting_init();
 
@@ -116,20 +126,37 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 //serialPortHelper.addCommands(sendTxt);
                 /*直接调用JNI库发送数据*/
                 SerialPortJNI.writePort(DataConversion.decodeHexString(sendTxt));
-                //setContentView(R.layout.activity_setting);  //加载layout_2布局文件
             }
         });
 
         mOpenBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if(isOpen){
                     serialPortHelper.closeDevice();
                     isOpen = false;
                 }else{
                     openSerialPort();
                 }
+                /*显示*/
                 showState();
+            }
+        });
+
+        mSetBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mainLayout.getVisibility() == LinearLayout.VISIBLE)
+                { /*0 表示显示*/
+                    mainLayout.setVisibility(LinearLayout.GONE); /*8 表示隐藏*/
+                    mSetBtn.setText("打开串口设置");
+                }
+                else
+                {
+                    mainLayout.setVisibility(LinearLayout.VISIBLE);
+                    mSetBtn.setText("关闭打开串口");
+                }
             }
         });
     }
@@ -217,12 +244,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         if(isOpen){
             Toast.makeText(this,"串口打开成功！",Toast.LENGTH_LONG).show();
             mOpenBtn.setText("关闭串口");
-            mOpenBtn.setTextColor(ContextCompat.getColor(this,R.color.org));
-            mOpenBtn.setBackgroundResource(R.drawable.button_style_stroke);
+            //mOpenBtn.setTextColor(ContextCompat.getColor(this,R.color.org));
+            //mOpenBtn.setBackgroundResource(R.drawable.button_style_stroke);
         }else {
             mOpenBtn.setText("打开串口");
-            mOpenBtn.setTextColor(ContextCompat.getColor(this,R.color.white));
-            mOpenBtn.setBackgroundResource(R.drawable.button_style_org);
+            //mOpenBtn.setTextColor(ContextCompat.getColor(this,R.color.white));
+            //mOpenBtn.setBackgroundResource(R.drawable.button_style_org);
         }
     }
 
