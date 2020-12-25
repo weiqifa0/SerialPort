@@ -1,3 +1,6 @@
+# 20201225-修改
+在原来的基础上简化了界面，把没有需要用的东西给干掉。
+
 # 20201211-修改
 基础代码和仓库是原来作者的，但是原来的代码经常挂掉，代码上做了一些修改。
 后续会有更多的修改。
@@ -14,10 +17,11 @@ Android串口通讯助手可以用于需要使用串口通信的Android外设，
 
 ### 1、DEMO演示
 
+
 使用该库简单实现的串口调试助手工具，[APK下载](https://github.com/freyskill/SerialPortHelper/blob/master/SerialPortHelperV1.0.1.apk)
 
-![image](https://github.com/freyskill/SerialPortHelper/blob/master/SerialPortHelper.png)
-
+**使用界面**
+![image](https://raw.githubusercontent.com/weiqifa0/pic/master/image-20201225161030811.png)
 
 
 ### 2、接入方式
