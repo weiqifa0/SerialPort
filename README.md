@@ -1,11 +1,8 @@
-# 20201225-修改
-在原来的基础上简化了界面，把没有需要用的东西给干掉。
 
-# 20201211-修改
-基础代码和仓库是原来作者的，但是原来的代码经常挂掉，代码上做了一些修改。
-后续会有更多的修改。
 
-# SerialPortHelper（Android串口通信）
+# 1、SerialPortHelper「Android串口通信」介绍
+
+[原项目地址](https://github.com/freyskill/SerialPortHelper)
 
 Android串口通讯助手可以用于需要使用串口通信的Android外设，该库有如下特点：
 
@@ -15,16 +12,29 @@ Android串口通讯助手可以用于需要使用串口通信的Android外设，
 4. 支持超时设置，设置超时时间后，如果命令在设置的时间内未反馈，则会根据设置的操作进行重发或退出该命令；
 5. 支持超时重发（可以N次重发，具体按需设置）与退出，退出会调用接收回调的 **onComplete** 方法。
 
-### 1、DEMO演示
+# 2、运行apk演示
+
+使用该库简单实现的串口调试助手工具，原来作者编译的版本有点问题，点击发送的时候会死掉，我重新修改了一份，大家在使用的时候如果有什么问题，可以提出来。
 
 
-使用该库简单实现的串口调试助手工具，[APK下载](https://github.com/freyskill/SerialPortHelper/blob/master/SerialPortHelperV1.0.1.apk)
 
 **使用界面**
+
+![image-20201225163928404](https://raw.githubusercontent.com/weiqifa0/pic/master/20201225164639682.png)
+
 ![image](https://raw.githubusercontent.com/weiqifa0/pic/master/image-20201225161030811.png)
 
 
-### 2、接入方式
+
+# 3、Apk 下载地址
+
+[APK下载-SerialPortHelperV1.0.1-20201225.apk](https://github.com/freyskill/SerialPortHelper/blob/master/SerialPortHelperV1.0.1.apk)
+
+如果github下载比较慢，可以关注公众号「嵌入式Linux」,回复「serial」获取下载链接。
+
+# 4、软件接入方式
+
+
 
 #### Step 1. Add the JitPack repository to your build file
 
@@ -47,9 +57,7 @@ dependencies {
 }
 ```
 
-
-
-### 3、使用说明
+# 5、使用说明
 
 初始化需要设置maxSize，也可以设置isReceiveMaxSize该参数默认为false，详细说明如下：
 
@@ -64,7 +72,7 @@ SerialPortHelper serialPortHelper = new SerialPortHelper(32);
 SerialPortHelper serialPortHelper = new SerialPortHelper(32,true);
 ```
 
-#### 3.1.初始化串口
+#### 5.1.初始化串口
 
 ```java
 //方式一：快速接入方式，设置好串口地址，或者地址和波特率即可，数据位、停止位、校验类型分别默认为8、1、N。
@@ -132,7 +140,7 @@ serialPortHelper.setSphResultCallback(new SphResultCallback() {
 });
 ```
 
-#### 3.2.数据发送与接收
+#### 5.2.数据发送与接收
 
 ```java
 // 发送数据
@@ -176,8 +184,19 @@ serialPortHelper.setSphResultCallback(new SphResultCallback() {
 });
 ```
 
-### 4、关闭串口
+### 5.3、关闭串口
 
 ```java
 serialPortHelper.closeDevice();
 ```
+
+# 6、修改记录
+
+## 20201225-修改
+
+在原来的基础上简化了界面，把没有需要用的东西给干掉。
+
+## 20201211-修改
+
+基础代码和仓库是原来作者的，但是原来的代码经常挂掉，代码上做了一些修改。
+后续会有更多的修改。
